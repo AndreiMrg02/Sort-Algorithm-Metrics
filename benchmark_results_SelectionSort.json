@@ -12,7 +12,7 @@
         "input_size": 10,
         "mode": "Threaded",
         "threads_spawned": 10,
-        "memory_used_bytes": 0,
+        "memory_used_bytes": 489000,
         "execution_time_ms": 2,
         "cpu_load_change_percent": 0,
         "algorithm": "SelectionSort"
@@ -40,7 +40,7 @@
         "mode": "Sequential",
         "threads_spawned": 0,
         "memory_used_bytes": 0,
-        "execution_time_ms": 3,
+        "execution_time_ms": 2,
         "cpu_load_change_percent": 0,
         "algorithm": "SelectionSort"
     },
@@ -49,7 +49,7 @@
         "mode": "Threaded",
         "threads_spawned": 25,
         "memory_used_bytes": 0,
-        "execution_time_ms": 6,
+        "execution_time_ms": 13,
         "cpu_load_change_percent": 0,
         "algorithm": "SelectionSort"
     },
@@ -57,8 +57,8 @@
         "input_size": 10000,
         "mode": "Sequential",
         "threads_spawned": 0,
-        "memory_used_bytes": 3334928,
-        "execution_time_ms": 45,
+        "memory_used_bytes": 753768,
+        "execution_time_ms": 59,
         "cpu_load_change_percent": 0,
         "algorithm": "SelectionSort"
     },
@@ -67,8 +67,26 @@
         "mode": "Threaded",
         "threads_spawned": 25,
         "memory_used_bytes": 0,
-        "execution_time_ms": 59,
+        "execution_time_ms": 66,
         "cpu_load_change_percent": 0,
+        "algorithm": "SelectionSort"
+    },
+    {
+        "input_size": 100000,
+        "mode": "Sequential",
+        "threads_spawned": 0,
+        "memory_used_bytes": 2798624,
+        "execution_time_ms": 2605,
+        "cpu_load_change_percent": 28.933724239921677,
+        "algorithm": "SelectionSort"
+    },
+    {
+        "input_size": 100000,
+        "mode": "Threaded",
+        "threads_spawned": 25,
+        "memory_used_bytes": 2601888,
+        "execution_time_ms": 2727,
+        "cpu_load_change_percent": -3.3923363585176336,
         "algorithm": "SelectionSort"
     }
 ]
