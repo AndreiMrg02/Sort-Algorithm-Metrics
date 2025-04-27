@@ -15,14 +15,18 @@ import sort.MergeSort;
 import sort.RadixSort;
 import sort.SelectionSort;
 import sort.SortAlgorithm;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
-import java.util.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class HelloController {
 
@@ -51,11 +55,11 @@ public class HelloController {
     protected void onHelloButtonClick() {
         buttonStart.setDisable(true);
 
-        SortAlgorithm[] algorithms = {new MergeSort(), new RadixSort(), new SelectionSort()};
-        String[] names = {"MergeSort", "RadixSort", "SelectionSort"};
+        SortAlgorithm[] algorithms = { new MergeSort(), new RadixSort(), new SelectionSort() };
+        String[] names = { "MergeSort", "RadixSort", "SelectionSort" };
 
         int totalSteps = algorithms.length * inputSizes.size() * 2;
-        int[] completedSteps = {0};
+        int[] completedSteps = { 0 };
 
         Platform.runLater(() -> {
             resultContainer.getChildren().clear();
@@ -72,15 +76,14 @@ public class HelloController {
                     String name = names[i];
 
                     resultsJsonMap.putIfAbsent(name, new HashMap<>());
-                    resultsJsonMap.get(name).putIfAbsent("Sequential", new ArrayList<>());
-                    resultsJsonMap.get(name).putIfAbsent("Threaded", new ArrayList<>());
+                    resultsJsonMap.get(name).putIfAbsent("Sequential", new java.util.ArrayList<>());
+                    resultsJsonMap.get(name).putIfAbsent("Threaded", new java.util.ArrayList<>());
 
                     int finalSizeIndex = sizeIndex;
 
                     // Sequential
                     int[] arrayCopy = originalArray.clone();
                     String resultSequential = runSortAndCollectInfo(algorithm, arrayCopy, name, "Sequential", size);
-
                     Platform.runLater(() -> {
                         addResultCard(name, "Sequential", resultSequential, finalSizeIndex);
                         updateProgress(completedSteps, totalSteps);
@@ -89,7 +92,6 @@ public class HelloController {
                     // Threaded
                     arrayCopy = originalArray.clone();
                     String resultThreaded = runSortAndCollectInfo(algorithm, arrayCopy, name, "Threaded", size);
-
                     Platform.runLater(() -> {
                         addResultCard(name, "Threaded", resultThreaded, finalSizeIndex);
                         updateProgress(completedSteps, totalSteps);
@@ -97,7 +99,7 @@ public class HelloController {
                 }
             }
 
-            saveResultsAsMultipleJson();
+            saveResultsAsGrafanaJson();
             Platform.runLater(() -> buttonStart.setDisable(false));
         }).start();
     }
@@ -130,7 +132,7 @@ public class HelloController {
         card.getChildren().add(content);
 
         int column = algorithmColumn.getOrDefault(algorithmName, 0);
-        int row = sizeIndex * 2 + (mode.equals("Sequential") ? 1 : 2); // +1 pentru că rândul 0 este rezervat pentru titlu
+        int row = sizeIndex * 2 + (mode.equals("Sequential") ? 1 : 2);
 
         resultContainer.add(card, column, row);
         GridPane.setMargin(card, new Insets(10));
@@ -144,7 +146,7 @@ public class HelloController {
         long usedMemoryBefore = getUsedMemory();
         double cpuBefore = getCpuLoadSafe();
 
-        if (mode.equals("Threaded")) {
+        if ("Threaded".equals(mode)) {
             algorithm.sortUsingThreading(array);
         } else {
             algorithm.sort(array);
@@ -153,46 +155,58 @@ public class HelloController {
         long endTime = System.nanoTime();
         double cpuAfter = getCpuLoadSafe();
         long usedMemoryAfter = getUsedMemory();
-
         int spawnedThreads = getSpawnedThreadsIfNeeded(algorithm);
 
-        long executionTimeMs = (endTime - startTime) / 1_000_000;
-        long memoryUsedBytes = usedMemoryAfter - usedMemoryBefore;
-        double cpuLoadChange = (cpuAfter - cpuBefore) * 100;
+        long executionTimeMs    = (endTime - startTime) / 1_000_000;
+        long memoryUsedBytes    = usedMemoryAfter - usedMemoryBefore;
+        double cpuLoadChangePct = (cpuAfter - cpuBefore) * 100;
 
-        JSONObject jsonResult = new JSONObject();
-        jsonResult.put("algorithm", name);
-        jsonResult.put("input_size", inputSize);
-        jsonResult.put("mode", mode);
-        jsonResult.put("execution_time_ms", executionTimeMs);
-        jsonResult.put("memory_used_bytes", memoryUsedBytes);
-        jsonResult.put("cpu_load_change_percent", cpuLoadChange);
-        jsonResult.put("threads_spawned", spawnedThreads);
+        // --- Build Grafana-friendly JSON point ---
+        JSONObject point = new JSONObject();
+        point.put("measurement", "sort_benchmark");
+        point.put("time", Instant.now().toString());
 
-        resultsJsonMap.get(name).get(mode).add(jsonResult);
+        JSONObject tags = new JSONObject();
+        tags.put("algorithm", name);
+        tags.put("mode", mode);
+        tags.put("input_size", inputSize);
+        point.put("tags", tags);
 
+        JSONObject fields = new JSONObject();
+        fields.put("execution_time_ms", executionTimeMs);
+        fields.put("memory_used_bytes", memoryUsedBytes);
+        fields.put("cpu_load_change_percent", cpuLoadChangePct);
+        fields.put("threads_spawned", spawnedThreads);
+        point.put("fields", fields);
+
+        resultsJsonMap.get(name).get(mode).add(point);
+
+        // Build on-screen summary
         StringBuilder sb = new StringBuilder();
-        sb.append(name).append(" (").append(mode).append(")\n");
-        sb.append("Input Size: ").append(inputSize).append("\n");
-        sb.append("Execution Time: ").append(executionTimeMs).append(" ms\n");
-        sb.append("Memory Used: ").append(memoryUsedBytes).append(" bytes\n");
-        sb.append("CPU Load Change (approx): ").append(String.format("%.2f", cpuLoadChange)).append(" %\n");
-        sb.append("Threads Spawned: ").append(spawnedThreads).append("\n");
-
+        sb.append(name).append(" (").append(mode).append(")\n")
+                .append("Input Size: ").append(inputSize).append("\n")
+                .append("Execution Time: ").append(executionTimeMs).append(" ms\n")
+                .append("Memory Used: ").append(memoryUsedBytes).append(" bytes\n")
+                .append("CPU Load Change: ").append(String.format("%.2f", cpuLoadChangePct)).append(" %\n")
+                .append("Threads Spawned: ").append(spawnedThreads).append("\n");
         return sb.toString();
     }
 
-    private void saveResultsAsMultipleJson() {
-        for (String algorithmName : resultsJsonMap.keySet()) {
-            for (String mode : resultsJsonMap.get(algorithmName).keySet()) {
-                JSONArray array = new JSONArray(resultsJsonMap.get(algorithmName).get(mode));
-                try (FileWriter file = new FileWriter("benchmark_results_" + algorithmName + "_" + mode + ".json")) {
-                    file.write(array.toString(4));
-                    System.out.println("Benchmark results saved to benchmark_results_" + algorithmName + "_" + mode + ".json");
-                } catch (IOException e) {
-                    e.printStackTrace();
+    private void saveResultsAsGrafanaJson() {
+        JSONArray allPoints = new JSONArray();
+        for (var algEntry : resultsJsonMap.entrySet()) {
+            for (var modeEntry : algEntry.getValue().entrySet()) {
+                for (JSONObject point : modeEntry.getValue()) {
+                    allPoints.put(point);
                 }
             }
+        }
+
+        try (FileWriter file = new FileWriter("benchmark_sort_benchmark.json")) {
+            file.write(allPoints.toString(4));
+            System.out.println("Grafana-friendly JSON saved to benchmark_sort_benchmark.json");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -229,13 +243,17 @@ public class HelloController {
     }
 
     private void resetSpawnedThreadsIfNeeded(SortAlgorithm algorithm) {
-        if (algorithm instanceof MergeSort || algorithm instanceof SelectionSort || algorithm instanceof RadixSort) {
+        if (algorithm instanceof MergeSort
+                || algorithm instanceof SelectionSort
+                || algorithm instanceof RadixSort) {
             algorithm.resetSpawnedThreads();
         }
     }
 
     private int getSpawnedThreadsIfNeeded(SortAlgorithm algorithm) {
-        if (algorithm instanceof MergeSort || algorithm instanceof SelectionSort || algorithm instanceof RadixSort) {
+        if (algorithm instanceof MergeSort
+                || algorithm instanceof SelectionSort
+                || algorithm instanceof RadixSort) {
             return algorithm.getSpawnedThreads();
         }
         return 0;
