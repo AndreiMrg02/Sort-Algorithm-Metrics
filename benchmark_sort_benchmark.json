@@ -1,0 +1,452 @@
+[
+    {
+        "time": "2025-04-27T12:59:30.428334300Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.450277Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.469854700Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 1000,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.516328900Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 160064,
+            "execution_time_ms": 3,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10000,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.679538900Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 1600064,
+            "execution_time_ms": 15,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100000,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.434333400Z",
+        "fields": {
+            "threads_spawned": 16,
+            "memory_used_bytes": 682640,
+            "execution_time_ms": 6,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 10,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.455263500Z",
+        "fields": {
+            "threads_spawned": 16,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 4,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 100,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.482835400Z",
+        "fields": {
+            "threads_spawned": 16,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 12,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 1000,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.524308300Z",
+        "fields": {
+            "threads_spawned": 16,
+            "memory_used_bytes": 160064,
+            "execution_time_ms": 7,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 10000,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.703325900Z",
+        "fields": {
+            "threads_spawned": 16,
+            "memory_used_bytes": 1794208,
+            "execution_time_ms": 23,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 100000,
+            "algorithm": "RadixSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.434333400Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.455263500Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.485813Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 2097152,
+            "execution_time_ms": 2,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 1000,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.554230100Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 29,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10000,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:33.255779200Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 2551,
+            "cpu_load_change_percent": 20.591613575805578
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100000,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.438309300Z",
+        "fields": {
+            "threads_spawned": 10,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 3,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 10,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.461260400Z",
+        "fields": {
+            "threads_spawned": 25,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 6,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 100,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.492813800Z",
+        "fields": {
+            "threads_spawned": 25,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 6,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 1000,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.607777600Z",
+        "fields": {
+            "threads_spawned": 25,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 52,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 10000,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:35.727953800Z",
+        "fields": {
+            "threads_spawned": 25,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 2472,
+            "cpu_load_change_percent": -7.391037046947135
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 100000,
+            "algorithm": "SelectionSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.420355600Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 505584,
+            "execution_time_ms": 254,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.438309300Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.462244600Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 0,
+            "execution_time_ms": 0,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 1000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.495812100Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 658560,
+            "execution_time_ms": 2,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.628679500Z",
+        "fields": {
+            "threads_spawned": 0,
+            "memory_used_bytes": 10904064,
+            "execution_time_ms": 18,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.426340700Z",
+        "fields": {
+            "threads_spawned": 13,
+            "memory_used_bytes": 1174544,
+            "execution_time_ms": 3,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 10,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.450277Z",
+        "fields": {
+            "threads_spawned": 17,
+            "memory_used_bytes": -26522752,
+            "execution_time_ms": 11,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 100,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.469854700Z",
+        "fields": {
+            "threads_spawned": 22,
+            "memory_used_bytes": 11286160,
+            "execution_time_ms": 6,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 1000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.512741600Z",
+        "fields": {
+            "threads_spawned": 59,
+            "memory_used_bytes": 33557816,
+            "execution_time_ms": 17,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 10000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-04-27T12:59:30.663582900Z",
+        "fields": {
+            "threads_spawned": 94,
+            "memory_used_bytes": 46371120,
+            "execution_time_ms": 34,
+            "cpu_load_change_percent": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Threaded",
+            "input_size": 100000,
+            "algorithm": "MergeSort"
+        }
+    }
+]
