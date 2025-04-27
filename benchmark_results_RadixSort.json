@@ -12,8 +12,8 @@
         "input_size": 10,
         "mode": "Threaded",
         "threads_spawned": 16,
-        "memory_used_bytes": 167816,
-        "execution_time_ms": 3,
+        "memory_used_bytes": 168296,
+        "execution_time_ms": 6,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
     },
@@ -30,7 +30,7 @@
         "input_size": 100,
         "mode": "Threaded",
         "threads_spawned": 16,
-        "memory_used_bytes": 1381152,
+        "memory_used_bytes": 0,
         "execution_time_ms": 2,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
@@ -40,7 +40,7 @@
         "mode": "Sequential",
         "threads_spawned": 0,
         "memory_used_bytes": 0,
-        "execution_time_ms": 0,
+        "execution_time_ms": 1,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
     },
@@ -48,8 +48,8 @@
         "input_size": 1000,
         "mode": "Threaded",
         "threads_spawned": 16,
-        "memory_used_bytes": 206640,
-        "execution_time_ms": 2,
+        "memory_used_bytes": 0,
+        "execution_time_ms": 12,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
     },
@@ -57,26 +57,26 @@
         "input_size": 10000,
         "mode": "Sequential",
         "threads_spawned": 0,
-        "memory_used_bytes": 938952,
-        "execution_time_ms": 3,
-        "cpu_load_change_percent": 0,
-        "algorithm": "RadixSort"
-    },
-    {
-        "input_size": 10000,
-        "mode": "Threaded",
-        "threads_spawned": 16,
-        "memory_used_bytes": 282656,
+        "memory_used_bytes": 160064,
         "execution_time_ms": 7,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
     },
     {
+        "input_size": 10000,
+        "mode": "Threaded",
+        "threads_spawned": 16,
+        "memory_used_bytes": 519160,
+        "execution_time_ms": 8,
+        "cpu_load_change_percent": 0,
+        "algorithm": "RadixSort"
+    },
+    {
         "input_size": 100000,
         "mode": "Sequential",
         "threads_spawned": 0,
-        "memory_used_bytes": 1600064,
-        "execution_time_ms": 11,
+        "memory_used_bytes": 2936176,
+        "execution_time_ms": 36,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
     },
@@ -85,7 +85,7 @@
         "mode": "Threaded",
         "threads_spawned": 16,
         "memory_used_bytes": 1600064,
-        "execution_time_ms": 20,
+        "execution_time_ms": 19,
         "cpu_load_change_percent": 0,
         "algorithm": "RadixSort"
     }

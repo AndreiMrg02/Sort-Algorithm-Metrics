@@ -1,0 +1,88 @@
+/* General background and text styling */
+.root {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-background-color: #2C2C2C; /* Dark background */
+    -fx-text-fill: #000000; /* Light text color */
+}
+
+/* Styling the header section */
+.top {
+    -fx-background-color: #333333; /* Slightly lighter background for the top section */
+    -fx-padding: 20px;
+}
+
+.top .label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000; /* White text */
+    -fx-padding: 10px;
+}
+
+.top .progress-bar {
+    -fx-accent: #4CAF50; /* Green progress bar */
+    -fx-pref-width: 400px;
+}
+
+/* Progress label styling */
+.top .progress-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #B0B0B0; /* Slightly darker gray for progress label */
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #4CAF50; /* Fresh green */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0.5, 0, 0);
+    -fx-transition: background-color 0.3s ease, -fx-background-radius 0.3s ease;
+}
+
+.button:hover {
+    -fx-background-color: #45A049; /* Slightly darker green on hover */
+}
+
+/* Styling the result cards */
+.result-card {
+    -fx-background-color: #333333; /* Dark background for results */
+    -fx-border-color: #444444; /* Subtle border */
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0.5, 0, 0);
+    -fx-max-width: 500px;
+}
+
+.result-card .text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff; /* White text in the result card */
+    -fx-wrapping-width: 470px;
+}
+
+/* Styling for the result container VBox */
+.result-container {
+    -fx-spacing: 15px;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+/* ScrollPane to contain results */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+/* Shadow effect for the buttons and result cards */
+.dropshadow {
+    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 0, 0);
+}
+
+/* Style for the VBox inside the BorderPane */
+.vbox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+}
