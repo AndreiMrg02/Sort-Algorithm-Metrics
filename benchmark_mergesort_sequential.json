@@ -1,0 +1,122 @@
+[
+    {
+        "time": "2025-05-03T08:02:12.299828600Z",
+        "fields": {
+            "threads_spawned": 0,
+            "thread_cpu_time_ms": 0,
+            "heap_memory_used_bytes": 0,
+            "thread_count_delta": 0,
+            "process_cpu_time_ms": 0,
+            "classes_loaded_delta": 0,
+            "execution_time_ms": 0,
+            "gc_time_ms": 0,
+            "gc_count": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-05-03T08:02:12.729284600Z",
+        "fields": {
+            "threads_spawned": 0,
+            "thread_cpu_time_ms": 0,
+            "heap_memory_used_bytes": 0,
+            "thread_count_delta": 0,
+            "process_cpu_time_ms": 0,
+            "classes_loaded_delta": 0,
+            "execution_time_ms": 0,
+            "gc_time_ms": 0,
+            "gc_count": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-05-03T08:02:13.151349100Z",
+        "fields": {
+            "threads_spawned": 0,
+            "thread_cpu_time_ms": 0,
+            "heap_memory_used_bytes": 0,
+            "thread_count_delta": 0,
+            "process_cpu_time_ms": 0,
+            "classes_loaded_delta": 0,
+            "execution_time_ms": 0,
+            "gc_time_ms": 0,
+            "gc_count": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 1000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-05-03T08:02:13.580821700Z",
+        "fields": {
+            "threads_spawned": 0,
+            "thread_cpu_time_ms": 0,
+            "heap_memory_used_bytes": 0,
+            "thread_count_delta": 0,
+            "process_cpu_time_ms": 0,
+            "classes_loaded_delta": 0,
+            "execution_time_ms": 1,
+            "gc_time_ms": 0,
+            "gc_count": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 10000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-05-03T08:02:14.116488100Z",
+        "fields": {
+            "threads_spawned": 0,
+            "thread_cpu_time_ms": 15,
+            "heap_memory_used_bytes": 8388608,
+            "thread_count_delta": 0,
+            "process_cpu_time_ms": 15,
+            "classes_loaded_delta": 0,
+            "execution_time_ms": 14,
+            "gc_time_ms": 0,
+            "gc_count": 0
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 100000,
+            "algorithm": "MergeSort"
+        }
+    },
+    {
+        "time": "2025-05-03T08:02:19.482241200Z",
+        "fields": {
+            "threads_spawned": 0,
+            "thread_cpu_time_ms": 62,
+            "heap_memory_used_bytes": 37996712,
+            "thread_count_delta": 0,
+            "process_cpu_time_ms": 93,
+            "classes_loaded_delta": 0,
+            "execution_time_ms": 85,
+            "gc_time_ms": 7,
+            "gc_count": 4
+        },
+        "measurement": "sort_benchmark",
+        "tags": {
+            "mode": "Sequential",
+            "input_size": 500000,
+            "algorithm": "MergeSort"
+        }
+    }
+]
