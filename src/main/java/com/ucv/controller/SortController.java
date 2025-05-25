@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -33,10 +34,8 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.ThreadMXBean;
 import java.net.URI;
 import java.net.URL;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 public class SortController implements Initializable {
 
@@ -58,11 +57,14 @@ public class SortController implements Initializable {
             "RadixSort", 1,
             "SelectionSort", 2
     );
-
+    private CheckComboBox<String> algorithmCheckbox;
+    private CheckComboBox<String> modeCheckbox;
     private final SortResultDAO resultDAO = new SortResultDAO();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         webEngine = webViewPane.getEngine();
+        progressLabel.setTranslateY(45);
+        progressLabel.setTranslateX(165);
         jvmMetricsButton.setOnAction(actionEvent -> {
             webEngine.load("http://localhost:3000/");
             try {
@@ -91,8 +93,130 @@ public class SortController implements Initializable {
 
         });
         inputSizeCheckbox.getItems().addAll(FXCollections.observableArrayList(inputSizes));
+
+        // ————— filtre deja existente —————
+        AnchorPane.setTopAnchor(inputSizeCheckbox, 10.0);
+        AnchorPane.setLeftAnchor(inputSizeCheckbox, 10.0);
+
+        // 1. Filtru algoritmi
+        List<String> algorithms = List.of("MergeSort", "RadixSort", "SelectionSort");
+        algorithmCheckbox = new CheckComboBox<>(
+                FXCollections.observableArrayList(algorithms)
+        );
+        algorithmCheckbox.setTooltip(new Tooltip("Select algorithms to include"));
+        algorithmCheckbox.setTitle("Select Algorithm");
+        algorithmCheckbox.setMinWidth(165);
+        algorithmCheckbox.setMinHeight(35);
+        algorithmCheckbox.setMaxWidth(165);
+        algorithmCheckbox.setMaxHeight(35);
+        algorithmCheckbox.setShowCheckedCount(true);
+        AnchorPane.setTopAnchor(algorithmCheckbox, 60.0);
+        AnchorPane.setLeftAnchor(algorithmCheckbox, 10.0);
+        paneWithFilters.getChildren().add(algorithmCheckbox);
+
+        // 2. Filtru moduri de rulare
+        List<String> modes = List.of("Sequential", "Threaded");
+        modeCheckbox = new CheckComboBox<>(
+                FXCollections.observableArrayList(modes)
+        );
+        modeCheckbox.setTooltip(new Tooltip("Select execution modes"));
+        modeCheckbox.setTitle("Select Mode");
+        modeCheckbox.setMinWidth(165);
+        modeCheckbox.setMinHeight(35);
+        modeCheckbox.setMaxWidth(165);
+        modeCheckbox.setMaxHeight(35);
+        modeCheckbox.setShowCheckedCount(true);
+
+        AnchorPane.setTopAnchor(modeCheckbox, 110.0);
+        AnchorPane.setLeftAnchor(modeCheckbox, 10.0);
+        paneWithFilters.getChildren().add(modeCheckbox);
+
     }
+
     @FXML
+    protected void onStartClick() {
+        // 1. Preluare selecții
+        List<Integer> sizes = inputSizeCheckbox.getCheckModel().getCheckedItems();
+        List<String> selectedAlgs = algorithmCheckbox.getCheckModel().getCheckedItems();
+        List<String> selectedModes = modeCheckbox.getCheckModel().getCheckedItems();
+
+        // 2. Validare
+        if (sizes.isEmpty() || selectedAlgs.isEmpty() || selectedModes.isEmpty()) {
+            Notifications.create()
+                    .title("No Selection")
+                    .text("Please select at least one size, algorithm and mode.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.TOP_CENTER)
+                    .showWarning();
+            return;
+        }
+
+        // 3. Pregătire UI și DB
+        buttonStart.setDisable(true);
+        resultContainer.getChildren().clear();
+        resultDAO.deleteAll();
+        addColumnTitles();
+
+        // 4. Construcție dinamică a algoritmilor și numelor
+        List<SortAlgorithm> algorithms = new ArrayList<>();
+        List<String> algNames = new ArrayList<>();
+        for (String alg : selectedAlgs) {
+            switch (alg) {
+                case "MergeSort":
+                    algorithms.add(new MergeSort());
+                    algNames.add("MergeSort");
+                    break;
+                case "RadixSort":
+                    algorithms.add(new RadixSort());
+                    algNames.add("RadixSort");
+                    break;
+                case "SelectionSort":
+                    algorithms.add(new SelectionSort());
+                    algNames.add("SelectionSort");
+                    break;
+                // dacă vei adăuga noi algoritmi, completează aici
+            }
+        }
+
+        int totalSteps = sizes.size() * algorithms.size() * selectedModes.size();
+        int[] completedSteps = { 0 };
+
+        // 5. Thread de procesare
+        new Thread(() -> {
+            // warm-up JIT
+            for (SortAlgorithm alg : algorithms) {
+                alg.sort(generateRandomArray(100));
+            }
+
+            for (int sizeIndex = 0; sizeIndex < sizes.size(); sizeIndex++) {
+                int size = sizes.get(sizeIndex);
+                int[] baseArray = generateRandomArray(size);
+
+                for (int algIndex = 0; algIndex < algorithms.size(); algIndex++) {
+                    SortAlgorithm algorithm = algorithms.get(algIndex);
+                    String name = algNames.get(algIndex);
+
+                    for (String mode : selectedModes) {
+                        // clone și sort
+                        int[] arrayToSort = baseArray.clone();
+                        String summary = runSortAndPersist(algorithm, arrayToSort, name, mode, size);
+
+                        // actualizare UI
+                        int finalSizeIndex = sizeIndex;
+                        Platform.runLater(() -> {
+                            addResultCard(name, mode, summary, finalSizeIndex);
+                            updateProgress(completedSteps, totalSteps);
+                        });
+                    }
+                }
+            }
+
+            // re-activează butonul
+            Platform.runLater(() -> buttonStart.setDisable(false));
+        }).start();
+    }
+
+/*
     protected void onStartClick() {
         ObservableList<Integer> selectedItems = inputSizeCheckbox.getCheckModel().getCheckedItems();
         if (checkEmptySelectedItems(selectedItems)) return;
@@ -141,6 +265,7 @@ public class SortController implements Initializable {
             Platform.runLater(() -> buttonStart.setDisable(false));
         }).start();
     }
+*/
 
     private static boolean checkEmptySelectedItems(ObservableList<Integer> selectedItems) {
         if (selectedItems.isEmpty()) {
@@ -275,6 +400,7 @@ public class SortController implements Initializable {
         Platform.runLater(() -> {
             progressBar.setProgress(progress);
             progressLabel.setText(String.format("Progress: %.0f%%", progress * 100));
+
         });
     }
 
