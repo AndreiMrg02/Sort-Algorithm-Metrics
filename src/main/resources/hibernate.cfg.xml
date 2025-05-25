@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Driver și conexiune -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/MetricsEvaluation</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">1234</property>
+
+        <!-- Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Pooling (opțional, cu HikariCP) -->
+        <property name="hibernate.hikari.connectionTimeout">20000</property>
+        <property name="hibernate.hikari.minimumIdle">5</property>
+        <property name="hibernate.hikari.maximumPoolSize">20</property>
+
+        <!-- Strategie de generare a schemaei -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Show SQL în consolă -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Înregistrează-ţi entităţile -->
+        <mapping class="com.ucv.model.SortResult"/>
+    </session-factory>
+</hibernate-configuration>

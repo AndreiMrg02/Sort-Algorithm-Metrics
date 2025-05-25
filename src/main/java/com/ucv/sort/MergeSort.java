@@ -1,5 +1,5 @@
 // Updated MergeSort.java
-package sort;
+package com.ucv.sort;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;

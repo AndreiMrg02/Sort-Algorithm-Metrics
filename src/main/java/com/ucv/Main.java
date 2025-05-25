@@ -1,4 +1,4 @@
-package org.example.sortalghoritms;
+package com.ucv;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +10,8 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/sortalghoritms/view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

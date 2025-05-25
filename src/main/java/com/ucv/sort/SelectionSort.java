@@ -1,4 +1,4 @@
-package sort;
+package com.ucv.sort;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,9 @@
 module org.example.sortalghoritms {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
+
+
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -9,6 +12,18 @@ module org.example.sortalghoritms {
     requires jdk.management;
     requires org.json;
 
-    opens org.example.sortalghoritms to javafx.fxml;
-    exports org.example.sortalghoritms;
+    // Hibernate & JPA
+    requires org.hibernate.orm.core;
+    requires jakarta.persistence;
+    requires java.persistence;
+    requires java.naming;
+
+    // Deschidere pentru JavaFX
+    opens com.ucv to javafx.graphics;
+    opens com.ucv.controller to javafx.fxml;
+
+    // Deschidere pentru Hibernate
+    opens com.ucv.model to org.hibernate.orm.core, jakarta.persistence;
+
+    exports com.ucv.controller;
 }
