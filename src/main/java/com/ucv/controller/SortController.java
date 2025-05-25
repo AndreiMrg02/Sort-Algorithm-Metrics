@@ -135,7 +135,7 @@ public class SortController implements Initializable {
 
     @FXML
     protected void onStartClick() {
-        // 1. Preluare selecții
+
         List<Integer> sizes = inputSizeCheckbox.getCheckModel().getCheckedItems();
         List<String> selectedAlgs = algorithmCheckbox.getCheckModel().getCheckedItems();
         List<String> selectedModes = modeCheckbox.getCheckModel().getCheckedItems();
@@ -174,7 +174,6 @@ public class SortController implements Initializable {
                     algorithms.add(new SelectionSort());
                     algNames.add("SelectionSort");
                     break;
-                // dacă vei adăuga noi algoritmi, completează aici
             }
         }
 
@@ -215,71 +214,6 @@ public class SortController implements Initializable {
             Platform.runLater(() -> buttonStart.setDisable(false));
         }).start();
     }
-
-/*
-    protected void onStartClick() {
-        ObservableList<Integer> selectedItems = inputSizeCheckbox.getCheckModel().getCheckedItems();
-        if (checkEmptySelectedItems(selectedItems)) return;
-        buttonStart.setDisable(true);
-        resultContainer.getChildren().clear();
-        resultDAO.deleteAll();
-        addColumnTitles();
-
-        SortAlgorithm[] algorithms = { new MergeSort(), new RadixSort(), new SelectionSort() };
-        String[] names = { "MergeSort", "RadixSort", "SelectionSort" };
-        int totalSteps = algorithms.length * selectedItems.size() * 2;
-        int[] completedSteps = { 0 };
-
-        new Thread(() -> {
-            // Warm-up for JIT
-            for (SortAlgorithm alg : algorithms) {
-                alg.sort(generateRandomArray(100));
-            }
-
-            for (int sizeIndex = 0; sizeIndex < selectedItems.size(); sizeIndex++) {
-                int size = selectedItems.get(sizeIndex);
-                int[] baseArray = generateRandomArray(size);
-
-                for (int i = 0; i < algorithms.length; i++) {
-                    SortAlgorithm algorithm = algorithms[i];
-                    String name = names[i];
-
-                    // Sequential execution
-                    int[] seqArray = baseArray.clone();
-                    String seqSummary = runSortAndPersist(algorithm, seqArray, name, "Sequential", size);
-                    int finalSizeIndex = sizeIndex;
-                    Platform.runLater(() -> {
-                        addResultCard(name, "Sequential", seqSummary, finalSizeIndex);
-                        updateProgress(completedSteps, totalSteps);
-                    });
-
-                    // Threaded execution
-                    int[] thArray = baseArray.clone();
-                    String thSummary = runSortAndPersist(algorithm, thArray, name, "Threaded", size);
-                    Platform.runLater(() -> {
-                        addResultCard(name, "Threaded", thSummary, finalSizeIndex);
-                        updateProgress(completedSteps, totalSteps);
-                    });
-                }
-            }
-            Platform.runLater(() -> buttonStart.setDisable(false));
-        }).start();
-    }
-*/
-
-    private static boolean checkEmptySelectedItems(ObservableList<Integer> selectedItems) {
-        if (selectedItems.isEmpty()) {
-            Notifications.create()
-                    .title("No Selection")
-                    .text("Please select at least one input size.")
-                    .hideAfter(Duration.seconds(3))
-                    .position(Pos.TOP_CENTER)
-                    .showWarning();
-            return true;
-        }
-        return false;
-    }
-
     private void addColumnTitles() {
         algorithmColumn.forEach((alg, col) -> {
             Label title = new Label(alg);
