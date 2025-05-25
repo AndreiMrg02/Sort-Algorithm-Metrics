@@ -2,7 +2,7 @@ module org.example.sortalghoritms {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
-
+    requires javafx.web;
 
 
     requires org.controlsfx.controls;
@@ -17,6 +17,7 @@ module org.example.sortalghoritms {
     requires jakarta.persistence;
     requires java.persistence;
     requires java.naming;
+    requires java.desktop;
 
     // Deschidere pentru JavaFX
     opens com.ucv to javafx.graphics;

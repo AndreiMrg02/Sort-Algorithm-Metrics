@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/sortalghoritms/view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
-        stage.setTitle("Hello!");
+        stage.setTitle("Sorting Algorithms - Metrics");
         stage.setScene(scene);
         stage.show();
     }

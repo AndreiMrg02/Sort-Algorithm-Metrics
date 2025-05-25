@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>24.0.1</version>
+            <version>17.0.6</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
@@ -87,12 +87,6 @@
             <artifactId>javax.persistence-api</artifactId>
             <version>2.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-web -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>24.0.1</version>
-        </dependency>
 
         <!-- Driver PostgreSQL -->
         <dependency>
@@ -122,7 +116,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.example.sortalghoritms/org.example.sortalghoritms.Main
+                            <mainClass>com.ucv.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

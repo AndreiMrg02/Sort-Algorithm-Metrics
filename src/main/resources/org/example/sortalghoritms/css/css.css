@@ -1,88 +1,107 @@
-/* General background and text styling */
+/* General resets */
 .root {
-    -fx-font-family: "Arial", sans-serif;
-    -fx-background-color: #2C2C2C; /* Dark background */
-    -fx-text-fill: #000000; /* Light text color */
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-base: #393954;
+    -fx-background-color: #363650;
+    -fx-text-fill: #eeeeee;
 }
 
-/* Styling the header section */
-.top {
-    -fx-background-color: #333333; /* Slightly lighter background for the top section */
-    -fx-padding: 20px;
+/* Top Label */
+.label {
+    -fx-text-fill: #eeeeee;
 }
 
-.top .label {
+.label.title {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
-    -fx-text-fill: #000000; /* White text */
-    -fx-padding: 10px;
 }
 
-.top .progress-bar {
-    -fx-accent: #4CAF50; /* Green progress bar */
-    -fx-pref-width: 400px;
+/* ProgressBar */
+.progress-bar {
+    -fx-accent: #4CAF50;
+    -fx-control-inner-background: #333333;
+    -fx-background-radius: 8;
+    -fx-padding: 5 0;
 }
 
-/* Progress label styling */
-.top .progress-label {
+/* Progress label */
+.label.progress-label {
     -fx-font-size: 14px;
-    -fx-text-fill: #B0B0B0; /* Slightly darker gray for progress label */
+    -fx-text-fill: #cccccc;
 }
 
-/* Button styling */
+/* Start Button */
 .button {
-    -fx-background-color: #4CAF50; /* Fresh green */
-    -fx-text-fill: white;
     -fx-font-size: 16px;
+    -fx-background-color: linear-gradient(to right, #4CAF50, #43A047);
+    -fx-text-fill: white;
     -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0, 2, 2);
+    -fx-cursor: hand;
     -fx-padding: 10 20;
-    -fx-effect: dropshadow(gaussian, #000000, 10, 0.5, 0, 0);
-    -fx-transition: background-color 0.3s ease, -fx-background-radius 0.3s ease;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
 }
 
-.button:hover {
-    -fx-background-color: #45A049; /* Slightly darker green on hover */
+/* TabPane */
+.tab-pane {
+    -fx-tab-min-width: 150;
+    -fx-tab-max-width: 200;
+    -fx-background-color: #2c2c3e;
 }
 
-/* Styling the result cards */
-.result-card {
-    -fx-background-color: #333333; /* Dark background for results */
-    -fx-border-color: #444444; /* Subtle border */
+.tab {
+    -fx-background-insets: 0 0 0 0;
+}
+
+.tab-label {
+    -fx-text-fill: #eeeeee;
+    -fx-font-weight: bold;
+}
+
+.tab:selected {
+    -fx-background-color: #4CAF50;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background: #2c2c3e;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Grid containers */
+.grid-pane {
+    -fx-background-color: #2c2c3e;
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+}
+
+/* Metrics Buttons */
+.hbox .button {
+    -fx-pref-height: 45px;
+    -fx-pref-width: 140px;
+    -fx-background-color: linear-gradient(to right, #1976D2, #2196F3);
+    -fx-font-weight: bold;
+}
+
+.hbox .button:hover {
+    -fx-background-color: linear-gradient(to right, #1565C0, #1E88E5);
+}
+
+/* WebView style (container) */
+.web-view {
+    -fx-border-color: #444;
+    -fx-border-width: 2;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-padding: 15px;
-    -fx-spacing: 10px;
-    -fx-effect: dropshadow(gaussian, #000000, 10, 0.5, 0, 0);
-    -fx-max-width: 500px;
 }
 
-.result-card .text {
-    -fx-font-size: 14px;
-    -fx-text-fill: #ffffff; /* White text in the result card */
-    -fx-wrapping-width: 470px;
-}
-
-/* Styling for the result container VBox */
-.result-container {
-    -fx-spacing: 15px;
-    -fx-alignment: center;
-    -fx-padding: 20px;
-}
-
-/* ScrollPane to contain results */
-.scroll-pane {
-    -fx-background-color: transparent;
-    -fx-padding: 10px;
-}
-
-/* Shadow effect for the buttons and result cards */
-.dropshadow {
-    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 0, 0);
-}
-
-/* Style for the VBox inside the BorderPane */
+/* VBox for Metrics */
 .vbox {
-    -fx-alignment: center;
-    -fx-spacing: 20px;
-    -fx-padding: 20px;
+    -fx-padding: 15;
+    -fx-spacing: 20;
 }

@@ -1,37 +1,58 @@
 package com.ucv.controller;
 
 import com.ucv.model.*;
+import com.ucv.sort.MergeSort;
+import com.ucv.sort.RadixSort;
+import com.ucv.sort.SelectionSort;
+import com.ucv.sort.SortAlgorithm;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import com.ucv.sort.MergeSort;
-import com.ucv.sort.RadixSort;
-import com.ucv.sort.SelectionSort;
-import com.ucv.sort.SortAlgorithm;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.util.Duration;
+import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.Notifications;
 
+import java.awt.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.ThreadMXBean;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public class SortController {
+public class SortController implements Initializable {
 
+    @FXML private AnchorPane paneWithFilters;
+    @FXML private  CheckComboBox inputSizeCheckbox;
+    @FXML private Button systemMetricsButton;
+    @FXML private Button jvmMetricsButton;
+    @FXML private Button generalMetricsButton;
+    @FXML private WebView webViewPane;
     @FXML private ProgressBar progressBar;
     @FXML private Label progressLabel;
     @FXML private GridPane resultContainer;
     @FXML private Button buttonStart;
+    @FXML private  WebEngine webEngine;
 
-    private final List<Integer> inputSizes = List.of(10, 100, 1_000, 10_000, 100_000);
+    private final List<Integer> inputSizes = List.of(10, 100, 1_000, 10_000, 100_000,1_000_000,10_000_000);
     private final Map<String, Integer> algorithmColumn = Map.of(
             "MergeSort", 0,
             "RadixSort", 1,
@@ -39,9 +60,42 @@ public class SortController {
     );
 
     private final SortResultDAO resultDAO = new SortResultDAO();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        webEngine = webViewPane.getEngine();
+        jvmMetricsButton.setOnAction(actionEvent -> {
+            webEngine.load("http://localhost:3000/");
+            try {
+                Desktop.getDesktop().browse(new URI("http://localhost:3000/d/bemxln96d3x8gc/jvm-metrics-sortalgorithms?orgId=1&from=now-6h&to=now&timezone=Europe%2FBucharest&var-inputSize=10&var-algorithm=SelectionSort&var-mode=Sequential"));
+            } catch (Exception ex){
 
+            }
+
+        });
+        systemMetricsButton.setOnAction(actionEvent -> {
+            webEngine.load("http://localhost:3000/");
+            try {
+                Desktop.getDesktop().browse(new URI("http://localhost:3000/d/aelanclsifshsd/system-metrics-sort-algorithms?orgId=1&from=now-6h&to=now&timezone=browser&var-algorithm=RadixSort&var-mode=Threaded&var-inputSize=10"));
+            } catch (Exception ex){
+
+            }
+
+        });
+        generalMetricsButton.setOnAction(actionEvent -> {
+            webEngine.load("http://localhost:3000/");
+            try {
+                Desktop.getDesktop().browse(new URI("http://localhost:3000/d/demy3nutt7zeob/general-overview-metrics?orgId=1&from=now-6h&to=now&timezone=browser&var-inputSize=1000&var-algorithm=SelectionSort&var-mode=Threaded"));
+            } catch (Exception ex){
+
+            }
+
+        });
+        inputSizeCheckbox.getItems().addAll(FXCollections.observableArrayList(inputSizes));
+    }
     @FXML
     protected void onStartClick() {
+        ObservableList<Integer> selectedItems = inputSizeCheckbox.getCheckModel().getCheckedItems();
+        if (checkEmptySelectedItems(selectedItems)) return;
         buttonStart.setDisable(true);
         resultContainer.getChildren().clear();
         resultDAO.deleteAll();
@@ -49,7 +103,7 @@ public class SortController {
 
         SortAlgorithm[] algorithms = { new MergeSort(), new RadixSort(), new SelectionSort() };
         String[] names = { "MergeSort", "RadixSort", "SelectionSort" };
-        int totalSteps = algorithms.length * inputSizes.size() * 2;
+        int totalSteps = algorithms.length * selectedItems.size() * 2;
         int[] completedSteps = { 0 };
 
         new Thread(() -> {
@@ -58,8 +112,8 @@ public class SortController {
                 alg.sort(generateRandomArray(100));
             }
 
-            for (int sizeIndex = 0; sizeIndex < inputSizes.size(); sizeIndex++) {
-                int size = inputSizes.get(sizeIndex);
+            for (int sizeIndex = 0; sizeIndex < selectedItems.size(); sizeIndex++) {
+                int size = selectedItems.get(sizeIndex);
                 int[] baseArray = generateRandomArray(size);
 
                 for (int i = 0; i < algorithms.length; i++) {
@@ -86,6 +140,19 @@ public class SortController {
             }
             Platform.runLater(() -> buttonStart.setDisable(false));
         }).start();
+    }
+
+    private static boolean checkEmptySelectedItems(ObservableList<Integer> selectedItems) {
+        if (selectedItems.isEmpty()) {
+            Notifications.create()
+                    .title("No Selection")
+                    .text("Please select at least one input size.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.TOP_CENTER)
+                    .showWarning();
+            return true;
+        }
+        return false;
     }
 
     private void addColumnTitles() {
@@ -210,5 +277,6 @@ public class SortController {
             progressLabel.setText(String.format("Progress: %.0f%%", progress * 100));
         });
     }
+
 
 }
